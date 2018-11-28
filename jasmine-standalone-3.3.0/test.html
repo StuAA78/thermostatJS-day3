@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+</head>
+<body>
+
+    <f h1>This is a test</h1>
+    <h1 id="test">Another test</h1>
+
+    <script src="jquery.js"></script>
+    <script>
+
+      $( document ).ready(function() {
+
+          $( "f" ).click(function( event ) {
+
+              alert( "As you can see, the link no longer took you to jquery.com" );
+
+              event.preventDefault();
+          });
+      });
+    </script>
+</body>
+</html>
