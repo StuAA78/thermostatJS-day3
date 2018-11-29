@@ -5,6 +5,19 @@ $(document).ready(function() {
   $('#city').val(city);
   getWeatherTemperature(city);
 
+  $(document).keydown(function(event){
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    var tag = event.target.tagName.toLowerCase();
+    if(tag == 'input') { return; }
+    if(keycode === 38 || keycode === 39){ // up or right arrow
+      thermostat.up();
+    };
+    if(keycode === 40 || keycode === 37){ // down or left arrow
+      thermostat.down();
+    };
+    updateTemperature();
+  })
+
   $('#temperature-up').on('click', function() {
     thermostat.up();
     updateTemperature();
