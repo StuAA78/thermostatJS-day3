@@ -1,9 +1,17 @@
 $(document).ready(function() {
   var thermostat = new Thermostat();
+
+  $.ajax({
+    url: "http://localhost:9292/json",
+    dataType: "json",
+    success: function(data) {
+      updateCity(data.city)
+      setTemperature(data.temperature)
+    }
+  })
+
   updateTemperature();
-  city = "London";
-  $('#city').val(city);
-  getWeatherTemperature(city);
+  updateCity("Manchester, GB");
 
   $(document).keydown(function(event){
     var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -54,6 +62,16 @@ $(document).ready(function() {
   function updateTemperature(){
     $('#temperature').text(thermostat.temperature);
     $('#temperature').attr('class', thermostat.energyUsage());
+  }
+
+  function setTemperature(temperature){
+    thermostat.temperature = temperature;
+    updateTemperature();
+  }
+
+  function updateCity(city){
+    $('#city').val(city);
+    getWeatherTemperature(city);
   }
 
   function getWeatherTemperature(city) {
